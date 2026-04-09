@@ -1,0 +1,108 @@
+
+/* استيراد الخط الموحد */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    /* نفس التدرج الخلفي */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+/* تنسيق صندوق المحتوى الرئيسي (الـ div الأول) */
+body > div {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 24px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+h2 {
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -1px;
+    font-size: 22px;
+}
+
+/* تنسيق خانات الإدخال */
+input {
+    width: 100% !important; /* لضمان الأولوية */
+    padding: 12px 14px !important; /* تعديل الـ padding من الكود الأصلي */
+    margin: 8px 0 !important; /* تباعد أفضل */
+    border-radius: 12px;
+    border: 1.5px solid #eee;
+    background: #f9f9f9;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* لضمان عدم الخروج عن الصندوق */
+    display: block; /* لضمان ترتيب العناصر عمودياً */
+}
+
+input:focus {
+    outline: none;
+    border-color: #000;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+}
+
+/* تنسيق الزرار */
+button {
+    width: 100% !important;
+    padding: 12px !important;
+    background: #000;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: block;
+}
+
+button:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* 🔥 السر هنا لتصحيح الـ Layout */
+/* ده بيلغي الـ br اللي بتسبب فجوات */
+br {
+    display: none;
+}
+
+/* تنسيق رسالة الخطأ (الـ div الثاني) */
+/* الـ selector ده بيستهدف الـ #error اللي جوه الـ body > div */
+body > div #error {
+    background: none; /* إزالة خلفية الصندوق الأبيض */
+    padding: 0; /* إزالة الـ padding */
+    box-shadow: none; /* إزالة الظل */
+    border-radius: 0; /* إزالة الحواف الدائرية */
+    border: none; /* إزالة الإطار */
+    backdrop-filter: none; /* إزالة تأثير الزجاج */
+    width: auto; /* إزالة العرض المحدد */
+    
+    /* تنسيق النص نفسه */
+    color: #ff3b30;
+    font-size: 13px;
+    margin-top: 15px !important; /* تباعد ناعم فوق الرسالة */
+    font-weight: 500;
+    min-height: 18px; /* للحفاظ على الـ spacing */
+    width: 100%; /* تأكيد العرض الكامل */
+}

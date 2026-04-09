@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+      <link rel="icon" type="image/png" href="imgs/logo2.png">
+    <title>Pure Guard | Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* جدار حماية لمنع الحركة يمين وشمال */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: relative;
+            background-color: #f8f9fa; /* لون خلفية مريح للعين */
+        }
+
+        /* تظبيط الموبايل */
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column;
+                overflow-x: hidden;
+            }
+
+            /* السايدبار السفلي (Bottom Nav) */
+            .sidebar {
+                width: 100% !important;
+                height: 65px !important;
+                position: fixed !important;
+                bottom: 0 !important;
+                top: auto !important;
+                left: 0 !important;
+                padding: 0 !important;
+                z-index: 9999;
+                display: flex !important;
+                flex-direction: row !important;
+                background: #0e1111 !important;
+                border-top: 1px solid #2a2a2a;
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            }
+
+            .sidebar h2 { display: none !important; }
+
+            .sidebar nav {
+                display: flex !important;
+                width: 100% !important;
+                justify-content: space-around !important;
+                align-items: center !important;
+                padding: 0 !important;
+            }
+
+            .sidebar nav a {
+                padding: 10px !important;
+                margin: 0 !important;
+                font-size: 20px !important;
+                text-align: center !important;
+                flex: 1;
+                border-radius: 0 !important;
+                color: #fff;
+            }
+
+            .sidebar nav a span { display: none; }
+
+            /* المحتوى الرئيسي */
+            .content {
+                margin-left: 0 !important;
+                padding: 15px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+                margin-bottom: 80px !important; 
+            }
+
+            header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 15px;
+            }
+
+            .top-stats {
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: row !important;
+                gap: 10px;
+            }
+
+            .stat-box {
+                flex: 1;
+                padding: 15px !important;
+                margin: 0 !important;
+                box-sizing: border-box;
+            }
+
+            .grid-inputs {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 12px !important;
+                width: 100% !important;
+            }
+
+            input, select, textarea, .main-btn {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .inventory.card, .admin-card {
+                width: 100% !important;
+                margin: 0 0 10px 0 !important;
+                box-sizing: border-box !important;
+            }
+            
+            #adminProducts {
+                width: 100% !important;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <aside class="sidebar">
+        <h2>PURE GUARD</h2>
+        <nav>
+            <a href="admin.html" class="active"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+            <a href="categories.html"><i class="fas fa-tags"></i> <span>Categories</span></a>
+            <a href="Analytics.html"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a>
+            <a href="orders.html" class="nav-link">
+                <i class="fas fa-shopping-basket"></i> <span>Orders</span>
+            </a>
+            <a href="setadmin.html"><i class="fas fa-user-shield"></i> <span>Admins</span></a>  
+            <a href="index.html"><i class="fas fa-shopping-bag"></i> <span>Storefront</span></a>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header>
+            <h1>Product Management</h1>
+            <div class="top-stats">
+                <div class="stat-box">
+                    <span>Total Products</span>
+                    <strong id="totalCount">0</strong>
+                </div>
+            </div>
+        </header>
+
+        <section class="form-card" style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h3><i class="fas fa-plus"></i> New Product</h3>
+            <div class="grid-inputs">
+                <form id="productForm">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+                        <input id="name" placeholder="Product Name" style="flex: 2; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-width: 200px;">
+                        <input id="price" type="number" placeholder="Price (EGP)" style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-width: 100px;">
+                    </div>
+
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+                        <select id="categorySelect" style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: #fff; min-width: 150px;"></select>
+                    </div>
+
+                    <textarea id="desc" placeholder="Product Description" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; min-height: 80px; margin-bottom: 12px;"></textarea>
+                    
+                    <div style="padding: 20px; border: 2px dashed #eee; border-radius: 8px; text-align: center; margin-bottom: 12px;">
+                        <label for="imageFile" style="cursor: pointer; color: #666; display: block;">
+                            <i class="fas fa-cloud-upload-alt" style="font-size: 24px; margin-bottom: 8px;"></i><br>
+                            Choose Product Image
+                        </label>
+                        <input type="file" id="imageFile" style="margin-top: 10px;">
+                    </div>
+
+                    <button type="button" onclick="addProduct(event)" class="main-btn" style="width: 100%; padding: 15px; cursor: pointer; font-weight: bold; background: #000; color: #fff; border: none; border-radius: 8px; transition: 0.3s;">
+                        Publish Product
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="inventory card" style="margin-top: 25px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h3>Live Inventory</h3>
+            <div id="adminProducts" style="margin-top: 15px;">
+                </div>
+        </section>
+    </main>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

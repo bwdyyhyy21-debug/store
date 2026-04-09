@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Pure Guard | Manage Categories</title>
+      <link rel="icon" type="image/png" href="imgs/logo2.png">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* تظبيط السايدبار والمحتوى للموبايل من غير ما نلمس ملف الـ CSS الأصلي */
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column; /* يخلي السايدبار فوق أو تحت المحتوى */
+            }
+            .sidebar {
+                width: 100% !important;
+                height: auto !important;
+                position: fixed !important;
+                bottom: 0 !important; /* الشريط يلزق تحت زي صور الأوردرز والاناليتكس */
+                top: auto !important;
+                left: 0 !important;
+                padding: 10px 0 !important;
+                z-index: 9999;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+            }
+            .sidebar h2 { display: none !important; } /* إخفاء اللوجو في الموبايل عشان الزحمة */
+            .sidebar nav {
+                display: flex !important;
+                width: 100% !important;
+                justify-content: space-around !important;
+                padding: 0 10px !important;
+            }
+            .sidebar nav a {
+                padding: 10px !important;
+                margin: 0 !important;
+                font-size: 18px !important; /* نركز على الأيقونات */
+                text-align: center !important;
+            }
+            .sidebar nav a span { display: none; } /* إخفاء النص لو الشاشة صغيرة أوي */
+
+            .content {
+                margin-left: 0 !important; /* شيل المساحة اللي كان السايدبار واخدها */
+                padding: 20px 15px !important;
+                margin-bottom: 80px !important; /* مساحة تحت عشان المنيو متغطيش الكلام */
+            }
+
+            /* تظبيط الفورم في الموبايل */
+            .form-card div {
+                flex-direction: column !important; /* يخلي الـ Input والـ Button تحت بعض */
+            }
+            .main-btn {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <h2>PURE GUARD</h2>
+        <nav>
+            <a href="admin.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+            <a href="categories.html" class="active"><i class="fas fa-tags"></i> <span>Categories</span></a>
+            <a href="Analytics.html"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a>
+            <a href="orders.html" class="nav-link">
+                <i class="fas fa-shopping-basket"></i> <span>Orders</span>
+            </a>
+            <a href="setadmin.html"><i class="fas fa-user-shield"></i> <span>Admins</span></a>  
+            <a href="index.html"><i class="fas fa-shopping-bag"></i> <span>Storefront</span></a>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header style="flex-wrap: wrap; gap: 10px;">
+            <h1>Category Management</h1>
+            <a href="admin.html" style="text-decoration: none;">
+                <button class="main-btn" style="width: auto; background: #4a5568; padding: 10px 20px;">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </a>
+        </header>
+
+        <section class="form-card">
+            <h3><i class="fas fa-plus-circle"></i> Create New Category</h3>
+            <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                <input id="catNameInput" placeholder="Category Name" style="flex: 1; min-width: 200px; padding: 12px; border: 1px solid #ddd; border-radius: 5px;">
+                <button onclick="createCategory()" class="main-btn" style="width: auto; min-width: 100px; margin: 0; padding: 10px 30px; background: #000; color: #fff; cursor: pointer;">Add</button>
+            </div>
+        </section>
+
+        <section class="inventory card" style="margin-top: 25px;">
+            <h3>Available Categories</h3>
+            <div id="categoriesList" style="margin-top: 15px;"></div>
+        </section>
+    </main>
+</div>
+<script src="js/categories.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/png" href="imgs/logo2.png">
+    <title>Pure Guard | Admin Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { display: flex; background-color: #f4f7f6; min-height: 100vh; flex-direction: row; }
+
+        /* القائمة الجانبية */
+        .sidebar { width: 250px; background-color: #0c0c0c; color: #fff; padding: 20px; display: flex; flex-direction: column; min-height: 100vh; position: sticky; top: 0; }
+        .sidebar h2 { text-align: center; margin-bottom: 30px; font-size: 20px; letter-spacing: 1px; color: #fff; }
+        .menu-item { padding: 15px; display: flex; align-items: center; cursor: pointer; color: #888; transition: 0.3s; border-radius: 8px; margin-bottom: 5px; text-decoration: none; }
+        .menu-item i { margin-right: 15px; font-size: 18px; width: 20px; text-align: center; }
+        .menu-item:hover, .menu-item.active { background-color: #007bff; color: #fff; }
+
+        /* محتوى الصفحة الرئيسي */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        .header-title { margin-bottom: 30px; font-size: 24px; font-weight: bold; color: #333; }
+
+        /* الكروت المشتركة */
+        .admin-card { background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: 100%; max-width: 900px; margin-bottom: 30px; }
+        .card-header { display: flex; align-items: center; margin-bottom: 25px; color: #333; font-weight: bold; font-size: 18px; }
+        .card-header i { font-size: 20px; margin-right: 10px; color: #007bff; }
+
+        /* الفورم */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #666; font-size: 14px; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; outline: none; transition: 0.3s; }
+        .form-group input:focus { border-color: #007bff; box-shadow: 0 0 5px rgba(0,123,255,0.2); }
+
+        .btn-publish { width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        .btn-publish:hover { background: #222; transform: translateY(-2px); }
+
+        /* الجدول */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        table thead tr { text-align: left; color: #888; border-bottom: 2px solid #eee; }
+        table th, table td { padding: 15px; }
+        table tbody tr { border-bottom: 1px solid #f9f9f9; transition: 0.3s; }
+        table tbody tr:hover { background-color: #fcfcfc; }
+
+        /* رسائل التنبيه */
+        #msg { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; text-align: center; font-size: 14px; font-weight: bold; }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 992px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; min-height: auto; position: relative; padding: 10px; }
+            .sidebar h2 { margin-bottom: 15px; }
+            .main-content { padding: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            /* تحويل الجدول لكروت في الموبايل */
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { display: none; }
+            tr { margin-bottom: 15px; border: 1px solid #eee; border-radius: 10px; padding: 10px; background: #fafafa; }
+            td { display: flex; justify-content: space-between; align-items: center; padding: 10px 5px !important; border: none !important; border-bottom: 1px dotted #ddd !important; text-align: right; }
+            td:last-child { border-bottom: none !important; justify-content: center; margin-top: 10px; }
+            td::before { content: attr(data-label); font-weight: bold; color: #333; float: left; text-align: left; }
+            
+            .admin-card { padding: 20px; }
+            .btn-publish { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PURE GUARD</h2>
+        <a href="admin.html" class="menu-item"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-tag"></i> Categories</a>
+        <a href="Analytics.html" class="menu-item"><i class="fas fa-chart-bar"></i> Analytics</a>
+        <a href="Orders.html" class="menu-item"><i class="fas fa-shopping-basket"></i> Orders</a>
+        <a href="setadmin.html" class="menu-item active"><i class="fas fa-user-shield"></i> Admins</a>
+        <a href="index.html" class="menu-item"><i class="fas fa-store"></i> Storefront</a>
+    </div>
+
+    <div class="main-content">
+        <h1 class="header-title">Admin Management</h1>
+
+        <div class="admin-card">
+            <div class="card-header">
+                <i class="fas fa-plus-circle"></i>
+                <span>Promote New Admin</span>
+            </div>
+
+            <div class="form-group">
+                <label>User Email Address</label>
+                <input type="email" id="userEmail" placeholder="e.g. user@example.com">
+            </div>
+
+            <button class="btn-publish" onclick="handlePromote()">Grant Admin Permissions</button>
+
+            <div id="msg"></div>
+        </div>
+
+        <div class="admin-card">
+            <div class="card-header">
+                <i class="fas fa-users-cog"></i>
+                <span>Current Admins</span>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th style="text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/setadmin.js"></script>
+</body>
+</html>

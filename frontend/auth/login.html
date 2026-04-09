@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <link rel="icon" type="image/png" href="imgs/logo2.png">
+  <title>Pure Guard | Login</title>
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* تغيير لـ min-height عشان الموبايل */
+    color: #333;
+    padding: 20px; /* مسافة أمان للموبايل */
+    box-sizing: border-box;
+  }
+
+  .box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 24px;
+    width: 100%; /* عرض مرن */
+    max-width: 380px; /* أقصى عرض للكمبيوتر */
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-sizing: border-box;
+  }
+
+  h2 {
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -1px;
+    font-size: 28px;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 1.5px solid #eee;
+    background: #f9f9f9;
+    font-size: 16px; /* حجم خط أفضل للموبايل عشان ميعملش Zoom تلقائي */
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #000;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+  }
+
+  .password-box {
+    position: relative;
+    width: 100%;
+  }
+
+  .eye {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 18px;
+    user-select: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #000;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  button:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    transform: translateY(0);
+  }
+
+  .error {
+    color: #ff3b30;
+    font-size: 13px;
+    margin-top: 15px;
+    min-height: 18px; /* حجز مساحة للخطأ عشان الصندوق ميتهزش */
+  }
+
+  /* روابط تسجيل الدخول والنسيان */
+  .footer-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* عشان لو الكلام كبير ينزل تحت بعضه في الموبايل */
+    gap: 10px;
+  }
+
+  .footer-links p {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .footer-links p:hover {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  /* تحسينات الموبايل الصغير */
+  @media (max-width: 400px) {
+    .box {
+      padding: 30px 20px;
+    }
+    h2 { font-size: 24px; }
+    .footer-links { justify-content: center; }
+  }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Login</h2>
+
+  <input id="login" placeholder="Email or Username" autocomplete="username">
+
+  <div class="password-box">
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+    <span class="eye" onclick="togglePassword()">👁️</span>
+  </div>
+
+  <button onclick="login()">Login</button>
+
+  <div id="error" class="error"></div>
+
+  <div class="footer-links">
+    <p onclick="goRegister()">Create Account</p>
+    <p onclick="goForgot()">Forgot Password?</p>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+
+<script>
+function togglePassword() {
+  const input = document.getElementById("password");
+  const eye = document.querySelector(".eye");
+  if (input.type === "password") {
+    input.type = "text";
+    eye.textContent = "🔒"; // تغيير الشكل للتوضيح
+  } else {
+    input.type = "password";
+    eye.textContent = "👁️";
+  }
+}
+
+function goRegister() {
+  window.location.href = "register.html";
+}
+
+function goForgot() {
+  window.location.href = "forgot.html";
+}
+</script>
+
+</body>
+</html>

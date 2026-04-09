@@ -1,0 +1,368 @@
+/* --- 1. الإعدادات العامة والخطوط --- */
+:root {
+    --primary-font: 'Inter', sans-serif;
+    --serif-font: 'Playfair Display', serif;
+    --bg-color: #ffffff;
+    --card-bg: #f9f9f9;
+    --text-main: #1a1a1a;
+    --text-muted: #666;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--primary-font);
+    background: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* --- 2. الهيدر (Sticky & Clean) --- */
+.main-header {
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    text-decoration: none;
+    color: #000;
+    letter-spacing: 1px;
+}
+.logo span { font-weight: 300; color: #888; }
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+.nav-menu a:hover { color: #888; }
+
+/* تنسيق كلمة Login الجديد */
+.auth-link {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.auth-link:hover {
+    color: #888;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.action-item {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 18px;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- 3. سكشن الـ Hero --- */
+.hero {
+    display: flex;
+    height: 85vh;
+    background-color: #f7f7f7;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-content {
+    flex: 1;
+    padding: 0 8%;
+}
+
+.hero-tagline {
+    font-family: var(--serif-font);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: #555;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.hero-title {
+    font-family: var(--serif-font);
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 400;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+}
+
+.hero-desc {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 450px;
+    margin-bottom: 40px;
+}
+
+.hero-btn {
+    padding: 18px 50px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+.hero-btn:hover { background: #333; transform: translateY(-2px); }
+
+.hero-image { flex: 1.2; height: 100%; }
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- 4. تنسيق الكاتيجوريز --- */
+.container {
+    max-width: 1300px;
+    margin: 100px auto;
+    padding: 0 40px;
+}
+
+.category-section {
+    margin-bottom: 120px;
+}
+
+.category-header {
+    text-align: center;
+    font-family: var(--serif-font);
+    font-size: 3rem;
+    margin-bottom: 60px;
+    font-weight: 400;
+}
+
+.category-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px 30px;
+}
+
+/* --- 5. كارت المنتج --- */
+.card {
+    background: var(--card-bg);
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background: #eee;
+    transition: transform 0.6s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    color: var(--text-main);
+    text-transform: capitalize;
+}
+
+.price-container {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.old {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.85em;
+    margin-right: 10px;
+}
+
+.new {
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.card button {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.card:hover button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 6. القائمة المنسدلة --- */
+.user-menu {
+    position: relative;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.dropdown {
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.dropdown div {
+    padding: 12px 20px;
+    transition: 0.2s;
+}
+.dropdown div:hover { background: #f9f9f9; }
+
+/* لما الكلاس ده يتضاف للـ body الموقع كله هيتقلب */
+body.rtl {
+    direction: rtl;
+    font-family: 'Cairo', sans-serif; /* يفضل تستخدم خط عربي شيك */
+}
+
+.btn-lang {
+    background: transparent;
+    border: 1px solid #000;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* --- 7. الموبايل --- */
+@media (max-width: 900px) {
+    .hero { flex-direction: column; height: auto; text-align: center; }
+    .hero-content { padding: 60px 20px; }
+    .hero-title { font-size: 3rem; }
+    .hero-image { height: 400px; width: 100%; }
+    .header-container { padding: 0 20px; }
+    .category-header { font-size: 2.2rem; }
+    .card button { opacity: 1; transform: translateY(0); }
+}
+
+/* الإعدادات العامة للموبايل والتابلت */
+@media (max-width: 1024px) {
+    .admin-card {
+        margin: 10px; /* تقليل الهوامش في التابلت */
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* تحويل الجدول لنظام الكروت في الموبايل */
+    table, thead, tbody, th, td, tr {
+        display: block; 
+    }
+
+    thead tr {
+        display: none; /* إخفاء رأس الجدول في الموبايل */
+    }
+
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 5px !important;
+        border: none !important;
+        border-bottom: 1px solid #f9f9f9 !important;
+    }
+
+    /* إضافة عنوان جانبي لكل خلية في الموبايل */
+    td::before {
+        content: attr(data-label); /* بياخد الاسم من الخاصية دي في الـ HTML */
+        font-weight: bold;
+        color: #888;
+        font-size: 13px;
+    }
+
+    td:last-child {
+        border-bottom: none !important;
+        justify-content: center; /* سنترة زرار الحذف */
+    }
+
+    .card-header span {
+        font-size: 16px;
+    }
+}

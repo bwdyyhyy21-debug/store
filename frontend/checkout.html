@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/png" href="imgs/logo2.png">
+    <title>Pure Guard Checkout</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+        :root {
+            --border-color: #e2e2e2;
+            --text-main: #1a1a1a;
+            --text-light: #737373;
+            --accent: #000000;
+            --bg-body: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        /* تنسيقات اللغة العربية */
+        body.rtl {
+            direction: rtl;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .lang-switch:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .checkout-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 580px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            font-style: italic;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .separator {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            line-height: 0.1em;
+            margin: 30px 0;
+        }
+        .separator span { background:#fff; padding:0 15px; color: var(--text-light); font-size: 12px; font-weight: 500; }
+
+        .section-title {
+            font-size: 17px;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        .input-group { margin-bottom: 12px; }
+        
+        .input-row { 
+            display: flex; 
+            gap: 12px; 
+            margin-bottom: 12px; 
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+        input:focus { 
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+
+        #cardBox {
+            background: #fcfcfc;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .pay-now-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .pay-now-btn:hover { background: #333; }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<button class="lang-switch" onclick="toggleLanguage()" id="langBtn">العربية</button>
+
+<div class="checkout-container">
+    <div class="header">
+        <div class="logo">Pure Guard</div>
+        <div class="breadcrumb" id="breadcrumb">Information • Shipping • Payment</div>
+    </div>
+
+    <div class="separator"><span id="contactHeader">CONTACT DETAILS</span></div>
+
+    <div class="section-title" id="contactTitle">Contact Information</div>
+    
+    <div class="input-group">
+        <input type="email" placeholder="Email address" id="email" required>
+    </div>
+
+    <div class="input-group">
+        <input type="tel" placeholder="Phone number" id="phone" required>
+    </div>
+
+    <div class="section-title" id="shippingTitle" style="margin-top: 30px;">Shipping Address</div>
+    <div class="input-group">
+        <select id="country">
+            <option value="Egypt">Egypt</option>
+        </select>
+    </div>
+    
+    <div class="input-row">
+        <input type="text" placeholder="First name" id="fname" required>
+        <input type="text" placeholder="Last name" id="lname" required>
+    </div>
+    
+    <div class="input-group">
+        <input type="text" placeholder="Full Address" id="address" required>
+    </div>
+
+    <div class="section-title" id="paymentTitle" style="margin-top: 30px;">Payment Method</div>
+    <div class="input-group">
+        <select id="method" onchange="toggleCardBox()">
+            <option value="cash" id="cashOpt">Cash on Delivery</option>
+        </select>
+    </div>
+
+    <div id="cardBox">
+        <div class="input-group">
+            <input type="text" placeholder="Card Number" id="cardNum">
+        </div>
+        <div class="input-row" style="margin-bottom: 0;">
+            <input type="text" placeholder="Expiry Date (MM / YY)" id="cardExp">
+            <input type="text" placeholder="Security Code (CVV)" id="cardCvv">
+        </div>
+    </div>
+
+    <button class="pay-now-btn" onclick="processPayment()" id="mainPayBtn">Complete Purchase</button>
+    
+    <div class="footer-note" id="footerNote">
+        🔒 All transactions are secure and encrypted.
+    </div>
+</div>
+
+<script>
+    const i18n = {
+        en: {
+            langBtn: "العربية",
+            logo: "Pure Guard",
+            breadcrumb: "Information • Shipping • Payment",
+            contactHeader: "CONTACT DETAILS",
+            contactTitle: "Contact Information",
+            emailPlh: "Email address",
+            phonePlh: "Phone number (e.g. +20 123 456 7890)",
+            shippingTitle: "Shipping Address",
+            fnamePlh: "First name",
+            lnamePlh: "Last name",
+            addressPlh: "Full Address (Street, Building, Apartment)",
+            paymentTitle: "Payment Method",
+            cashOpt: "Cash on Delivery",
+            cardNumPlh: "Card Number",
+            expiryPlh: "Expiry Date (MM / YY)",
+            cvvPlh: "Security Code (CVV)",
+            payBtn: "Complete Purchase",
+            footer: "🔒 All transactions are secure and encrypted.",
+            alertFields: "Please fill in all required fields! ⚠️",
+            alertCart: "Your cart is empty! 🛒",
+            processing: "Processing...",
+            success: "Order Placed Successfully! 🎉 Check your email for confirmation.",
+            serverErr: "Server is not responding. Please try again later. ❌"
+        },
+        ar: {
+            langBtn: "English",
+            logo: "بيور جارد",
+            breadcrumb: "المعلومات • الشحن • الدفع",
+            contactHeader: "تفاصيل الاتصال",
+            contactTitle: "معلومات التواصل",
+            emailPlh: "البريد الإلكتروني",
+            phonePlh: "رقم الهاتف (مثال: 01234567890 20+)",
+            shippingTitle: "عنوان الشحن",
+            fnamePlh: "الاسم الأول",
+            lnamePlh: "الاسم الأخير",
+            addressPlh: "العنوان بالكامل (الشارع، المبنى، الشقة)",
+            paymentTitle: "طريقة الدفع",
+            cashOpt: "الدفع عند الاستلام",
+            cardNumPlh: "رقم البطاقة",
+            expiryPlh: "تاريخ الانتهاء (MM / YY)",
+            cvvPlh: "رمز الأمان (CVV)",
+            payBtn: "إتمام الشراء",
+            footer: "🔒 جميع المعاملات آمنة ومشفرة.",
+            alertFields: "يرجى ملء جميع الخانات المطلوبة! ⚠️",
+            alertCart: "سلة التسوق فارغة! 🛒",
+            processing: "جاري المعالجة...",
+            success: "تم تسجيل الطلب بنجاح! 🎉 تفقد بريدك الإلكتروني للتأكيد.",
+            serverErr: "السيرفر لا يستجيب. يرجى المحاولة لاحقاً. ❌"
+        }
+    };
+
+    let currentLang = 'en';
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'ar' : 'en';
+        document.body.classList.toggle('rtl', currentLang === 'ar');
+        
+        // تحديث النصوص الثابتة
+        document.getElementById("langBtn").innerText = i18n[currentLang].langBtn;
+        document.querySelector(".logo").innerText = i18n[currentLang].logo;
+        document.getElementById("breadcrumb").innerText = i18n[currentLang].breadcrumb;
+        document.getElementById("contactHeader").innerText = i18n[currentLang].contactHeader;
+        document.getElementById("contactTitle").innerText = i18n[currentLang].contactTitle;
+        document.getElementById("shippingTitle").innerText = i18n[currentLang].shippingTitle;
+        document.getElementById("paymentTitle").innerText = i18n[currentLang].paymentTitle;
+        document.getElementById("cashOpt").innerText = i18n[currentLang].cashOpt;
+        document.getElementById("mainPayBtn").innerText = i18n[currentLang].payBtn;
+        document.getElementById("footerNote").innerText = i18n[currentLang].footer;
+
+        // تحديث الـ Placeholders
+        document.getElementById("email").placeholder = i18n[currentLang].emailPlh;
+        document.getElementById("phone").placeholder = i18n[currentLang].phonePlh;
+        document.getElementById("fname").placeholder = i18n[currentLang].fnamePlh;
+        document.getElementById("lname").placeholder = i18n[currentLang].lnamePlh;
+        document.getElementById("address").placeholder = i18n[currentLang].addressPlh;
+        document.getElementById("cardNum").placeholder = i18n[currentLang].cardNumPlh;
+        document.getElementById("cardExp").placeholder = i18n[currentLang].expiryPlh;
+        document.getElementById("cardCvv").placeholder = i18n[currentLang].cvvPlh;
+    }
+
+    function toggleCardBox() {
+        const method = document.getElementById("method").value;
+        const cardBox = document.getElementById("cardBox");
+        cardBox.style.display = method === "card" ? "block" : "none";
+    }
+
+    function getCartTotal(cart) {
+        return cart.reduce((total, item) => total + (item.price * item.qty), 0);
+    }
+
+    async function processPayment() {
+        const btn = document.getElementById('mainPayBtn');
+        const orderData = {
+            contact: {
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value
+            },
+            shipping: {
+                country: document.getElementById("country").value,
+                firstName: document.getElementById("fname").value,
+                lastName: document.getElementById("lname").value,
+                address: document.getElementById("address").value
+            },
+            paymentMethod: document.getElementById("method").value,
+            cart: JSON.parse(localStorage.getItem("cart")) || [],
+        };
+
+        if (!orderData.contact.email || !orderData.contact.phone || !orderData.shipping.address) {
+            alert(i18n[currentLang].alertFields);
+            return;
+        }
+
+        if (orderData.cart.length === 0) {
+            alert(i18n[currentLang].alertCart);
+            return;
+        }
+
+        orderData.total = getCartTotal(orderData.cart);
+
+        try {
+            btn.innerText = i18n[currentLang].processing;
+            btn.disabled = true;
+
+            const response = await fetch("http://localhost:3000/checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(orderData)
+            });
+
+            if (response.ok) {
+                alert(i18n[currentLang].success);
+                localStorage.removeItem("cart");
+                window.location.href = "index.html";
+            } else {
+                const errorText = await response.text();
+                alert("Error: " + errorText);
+                btn.innerText = i18n[currentLang].payBtn;
+                btn.disabled = false;
+            }
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            alert(i18n[currentLang].serverErr);
+            btn.innerText = i18n[currentLang].payBtn;
+            btn.disabled = false;
+        }
+    }
+</script>
+
+</body>
+</html>

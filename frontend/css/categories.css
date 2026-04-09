@@ -1,0 +1,101 @@
+/* --- الإعدادات العامة لمنع السكول الجانبي (توضع في أول الملف) --- */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- تعديل نظام الكاتيجوري (Dark Mode) --- */
+.cat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg); /* استخدام المتغير اللي عرفناه قبل كدة */
+    padding: 15px;
+    margin: 10px 0; /* هوامش رأسية فقط لمنع الخروج عن الشاشة */
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.cat-row button {
+    background: var(--danger); /* اللون الأحمر للأكشن */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cat-row button:hover {
+    opacity: 0.8;
+}
+
+/* --- الإعدادات العامة للموبايل والتابلت --- */
+@media (max-width: 1024px) {
+    .admin-card {
+        margin: 10px 0; 
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 768px) {
+    /* تحويل الجدول لنظام كروت غامقة متناسقة */
+    table, thead, tbody, th, td, tr {
+        display: block; 
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    thead tr {
+        display: none; /* إخفاء رأس الجدول */
+    }
+
+    tr {
+        margin-bottom: 20px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 15px;
+        background: var(--card-bg);
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0 !important;
+        border: none !important;
+        border-bottom: 1px solid #2a2a2a !important; /* فاصل بسيط بين البيانات داخل الكارت */
+    }
+
+    /* العناوين الجانبية (data-label) */
+    td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--accent); /* لون مميز للعناوين الجانبية */
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    td:last-child {
+        border-bottom: none !important;
+        margin-top: 10px;
+        justify-content: center; /* سنترة زرار الحذف أو التعديل */
+    }
+
+    .card-header span {
+        font-size: 16px;
+    }
+
+    /* تأكيد عدم وجود أي سكول جانبي */
+    .main-content {
+        padding: 15px;
+        overflow-x: hidden;
+    }
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <link rel="icon" type="image/png" href="imgs/logo2.png">
+  <title>Pure Guard | Reset Password</title>
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-sizing: border-box;
+  }
+
+  h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -1px;
+    font-size: 26px;
+  }
+
+  p.instruction {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 1.5px solid #eee;
+    background: #f9f9f9;
+    font-size: 16px; /* لمنع الـ Zoom في الموبايل */
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #000;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #000;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  button:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+
+  .error {
+    color: #ff3b30;
+    font-size: 13px;
+    margin-top: 15px;
+    min-height: 20px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 25px;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .back-link:hover {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 400px) {
+    .box { padding: 30px 20px; }
+    h2 { font-size: 22px; }
+  }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Reset Password</h2>
+  <p class="instruction">Enter your email address and we'll send you a code to reset your password.</p>
+
+  <input id="email" type="email" placeholder="Enter Email" autocomplete="email">
+  
+  <button onclick="forgot()">Send Code</button>
+
+  <div id="error" class="error"></div>
+
+  <a href="login.html" class="back-link">← Back to Login</a>
+</div>
+
+<script src="auth.js"></script>
+
+</body>
+</html>

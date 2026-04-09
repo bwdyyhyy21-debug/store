@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/png" href="imgs/logo2.png">
+    <title>Verify Your Account | Pure Guard</title>
+    <style>
+        /* ستايل متماشي مع روح الموقع (Minimalist) */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9; /* رمادي فاتح جداً للموقع */
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        .verify-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 5px; /* عشان الأرقام تبان شيك */
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #000;
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 50px; /* نفس شكل Add to cart */
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        #error {
+            font-size: 13px;
+            margin-top: 15px;
+            min-height: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="verify-card">
+    <h2>Enter Verification Code</h2>
+    <p>We've sent a 6-digit code to your email.</p>
+
+    <input type="text" id="code" placeholder="000000" maxlength="6">
+    
+    <button id="verifyBtn" onclick="handleVerify()">Verify Account</button>
+
+    <div id="error"></div>
+</div>
+
+<script src="auth.js"></script>
+
+<script>
+    // تظبيطة صغيرة عشان الزرار يدي إحساس بالتفاعل
+    async function handleVerify() {
+        const btn = document.getElementById('verifyBtn');
+        const errorDiv = document.getElementById('error');
+        
+        btn.disabled = true;
+        btn.innerText = "Checking...";
+        errorDiv.style.color = "#666";
+        errorDiv.innerText = "Processing your request...";
+
+        try {
+            // هنا بننادي على دالة verify اللي موجودة في ملف auth.js بتاعك
+            await verify(); 
+        } catch (err) {
+            errorDiv.style.color = "red";
+            errorDiv.innerText = "Something went wrong. Try again.";
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "Verify Account";
+        }
+    }
+</script>
+
+</body>
+</html>

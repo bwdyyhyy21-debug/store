@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <link rel="icon" type="image/png" href="imgs/logo2.png">
+  <title>Pure Guard | Register</title>
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    color: #333;
+    padding: 20px; /* مسافة أمان للموبايل */
+    box-sizing: border-box;
+  }
+
+  .box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 24px;
+    width: 100%; /* عرض مرن للموبايل */
+    max-width: 400px; /* أقصى عرض للكمبيوتر */
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-sizing: border-box;
+  }
+
+  h2 {
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: -1px;
+    font-size: 28px;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 8px 0;
+    border-radius: 12px;
+    border: 1.5px solid #eee;
+    background: #f9f9f9;
+    font-size: 16px; /* حجم خط يمنع الـ Auto Zoom في الموبايل */
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #000;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+  }
+
+  .password-box {
+    position: relative;
+    width: 100%;
+  }
+
+  .eye {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    opacity: 0.4;
+    transition: 0.3s;
+    font-size: 18px;
+    user-select: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #000;
+    border: none;
+    color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  button:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+
+  .error {
+    color: #ff3b30;
+    font-size: 13px;
+    margin-top: 15px;
+    font-weight: 500;
+    min-height: 20px; /* عشان الصندوق ميتزحزحش لما يظهر الخطأ */
+  }
+
+  p {
+    font-size: 13px;
+    color: #666;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+  }
+
+  p:hover {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  /* تحسينات الشاشات الصغيرة جداً */
+  @media (max-width: 400px) {
+    .box { padding: 30px 20px; }
+    h2 { font-size: 24px; }
+  }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Create Account</h2>
+
+  <input id="username" placeholder="Username" autocomplete="username">
+  <input id="email" placeholder="Email" autocomplete="email">
+
+  <div class="password-box">
+    <input id="password" type="password" placeholder="Password" autocomplete="new-password">
+    <span class="eye" onclick="togglePassword('password')">👁️</span>
+  </div>
+
+  <div class="password-box">
+    <input id="confirm" type="password" placeholder="Confirm Password" autocomplete="new-password">
+    <span class="eye" onclick="togglePassword('confirm')">👁️</span>
+  </div>
+
+  <button onclick="register()">Register</button>
+
+  <div id="error" class="error"></div>
+
+  <p onclick="goLogin()">Already have an account?</p>
+</div>
+
+<script src="auth.js"></script>
+
+<script>
+function togglePassword(id) {
+  const input = document.getElementById(id);
+  input.type = input.type === "password" ? "text" : "password";
+}
+
+function goLogin() {
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
